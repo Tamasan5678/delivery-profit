@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'core/theme/app_theme.dart';
 import 'screens/home/home_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const DeliveryProfitApp());
 }
 
@@ -12,16 +15,11 @@ class DeliveryProfitApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Delivery Profit',
 
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF8F7F5),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFFF6B00),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+
+      theme: AppTheme.lightTheme,
 
       home: const HomeScreen(),
     );

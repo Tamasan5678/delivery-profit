@@ -1,12 +1,11 @@
 name: delivery_profit_v2
-description: "Delivery Profit - Food Delivery Profit Management App"
-
-publish_to: 'none'
+description: Delivery Profit - フードデリバリー収支管理アプリ
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.12.2
+  sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -14,28 +13,36 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  # データベース
+  # データ保存
+  shared_preferences: ^2.5.3
+
+  # SQLite
   sqflite: ^2.4.2
 
-  # SQLite保存先取得
+  # パス取得
   path: ^1.9.1
-
-  # 日付・金額フォーマット
-  intl: ^0.20.2
-
-  # 設定保存
-  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^6.0.0
+  flutter_lints: ^5.0.0
+
+
+
+  # アプリアイコン
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/images/
     - assets/icons/
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/app_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+

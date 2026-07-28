@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../core/theme/app_colors.dart';
+import '../core/theme/app_text_styles.dart';
+
 class OptionButton extends StatelessWidget {
   final String text;
   final IconData icon;
-  final Color backgroundColor;
-  final Color borderColor;
-  final Color textColor;
   final VoidCallback onPressed;
 
   const OptionButton({
     super.key,
     required this.text,
     required this.icon,
-    required this.backgroundColor,
-    required this.borderColor,
-    required this.textColor,
     required this.onPressed,
   });
 
@@ -27,20 +24,16 @@ class OptionButton extends StatelessWidget {
         onPressed: onPressed,
         icon: Icon(
           icon,
-          color: textColor,
+          color: AppColors.buttonSecondaryText,
         ),
         label: Text(
           text,
-          style: TextStyle(
-            color: textColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
-          ),
+          style: AppTextStyles.secondaryButton,
         ),
         style: OutlinedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          side: BorderSide(
-            color: borderColor,
+          backgroundColor: Colors.white,
+          side: const BorderSide(
+            color: AppColors.buttonBorder,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

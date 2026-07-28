@@ -1,193 +1,116 @@
 import 'package:flutter/material.dart';
 
+import '../../core/theme/app_colors.dart';
+import '../finish/finish_input_screen.dart';
 import '../start/start_distance_screen.dart';
+import '../../widgets/greeting_header.dart';
+import '../../widgets/info_card.dart';
+import '../../widgets/option_button.dart';
+import '../../widgets/primary_button.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  String _greeting() {
-    final hour = DateTime.now().hour;
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-    if (hour < 12) {
-      return "おはようございます！";
-    } else if (hour < 18) {
-      return "こんにちは！";
-    } else {
-      return "こんばんは！";
-    }
-  }
-
-  String _today() {
-    final now = DateTime.now();
-
-    const week = [
-      "月",
-      "火",
-      "水",
-      "木",
-      "金",
-      "土",
-      "日",
-    ];
-
-    return "${now.year}/${now.month}/${now.day}（${week[now.weekday - 1]}）";
-  }
-
-  Widget _infoCard(
-      String title,
-      String value,
-      String unit,
-      ) {
-    return Card(
-      elevation: 1,
-      margin: const EdgeInsets.only(bottom: 14),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 18,
-          vertical: 18,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 4),
-            Text(
-              unit,
-              style: const TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _mainButton(
-      BuildContext context,
-      String text,
-      IconData icon,
-      Color color,
-      VoidCallback onPressed,
-      ) {
-    return SizedBox(
-      width: double.infinity,
-      height: 56,
-      child: ElevatedButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon),
-        label: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
-        ),
-      ),
-    );
-  }
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("🚗 Delivery Profit"),
-        centerTitle: true,
-      ),
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                _today(),
-                style: const TextStyle(
-                  color: Colors.grey,
-                ),
+              const GreetingHeader(
+                logoWidth: 180,
+                logoBottomSpacing: 16,
               ),
-              const SizedBox(height: 8),
-              Text(
-                _greeting(),
-                style: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 30),
-
-              _infoCard("今日の利益", "0", "円"),
-              _infoCard("今日の売上", "0", "円"),
-              _infoCard("今日の件数", "0", "件"),
-              _infoCard("オンライン時間", "0:00", ""),
-
-              const SizedBox(height: 25),
-
-              _mainButton(
-                context,
-                "配達開始",
-                Icons.play_arrow,
-                Colors.orange,
-                    () {
-                  Navigator.push(
-                    context,
+              const SizedBox(height: 24),
+              PrimaryButton(
+                text: '🚗 配達開始',
+                onPressed: () {
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (_) => const StartDistanceScreen(),
                     ),
                   );
                 },
               ),
-
-              const SizedBox(height: 12),
-
-              _mainButton(
-                context,
-                "履歴",
-                Icons.history,
-                Colors.blue,
-                    () {
-                  // 今後実装
+              const SizedBox(height: 16),
+              OptionButton(
+                text: '配達終了',
+                icon: Icons.stop_circle_outlined,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const FinishInputScreen(),
+                    ),
+                  );
                 },
               ),
-
+              const SizedBox(height: 24),
+              Row(
+                children: [
+                  Expanded(
+                    child: InfoCard(
+                      title: '今日の利益',
+                      value: '0',
+                      unit: '円',
+                      icon: Icons.account_balance_wallet,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: InfoCard(
+                      title: '今日の売上',
+                      value: '0',
+                      unit: '円',
+                      icon: Icons.payments,
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 12),
-
-              _mainButton(
-                context,
-                "設定",
-                Icons.settings,
-                Colors.grey,
-                    () {
-                  // 今後実装
-                },
+              Row(
+                children: [
+                  Expanded(
+                    child: InfoCard(
+                      title: '今日の件数',
+                      value: '0',
+                      unit: '件',
+                      icon: Icons.delivery_dining,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: InfoCard(
+                      title: 'オンライン',
+                      value: '0:00',
+                      unit: '',
+                      icon: Icons.timer,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (i) => setState(() => _selectedIndex = i),
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'ホーム'),
+          NavigationDestination(icon: Icon(Icons.bar_chart), label: '履歴'),
+          NavigationDestination(icon: Icon(Icons.settings), label: '設定'),
+        ],
       ),
     );
   }
