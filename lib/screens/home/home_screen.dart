@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../models/delivery_session.dart';
+import '../../models/finish_input_result.dart';
 import '../finish/finish_input_screen.dart';
 import '../start/start_distance_screen.dart';
 import '../../widgets/greeting_header.dart';
@@ -18,12 +20,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   bool _isDelivering = false;
-  int? _targetCount;
-  String? _weather;
+  DeliverySession? _deliverySession;
+  int _todaySales = 0;
+  int _todayDeliveryCount = 0;
+  String _todayOnlineTime = '0:00';
 
   Future<void> _startDelivery() async {
-    final deliveryStart = await Navigator.of(context).push<
-        ({int targetCount, String weather})>(
+    final deliveryStart = await Navigator.of(context).push<DeliverySession>(
       MaterialPageRoute(
         builder: (_) => const StartDistanceScreen(),
       ),
@@ -35,26 +38,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       _isDelivering = true;
-      _targetCount = deliveryStart.targetCount;
-      _weather = deliveryStart.weather;
+      _deliverySession = deliveryStart;
     });
   }
 
   Future<void> _finishDelivery() async {
-    final isCompleted = await Navigator.of(context).push<bool>(
+    final finishResult = await Navigator.of(context).push<FinishInputResult>(
       MaterialPageRoute(
         builder: (_) => const FinishInputScreen(),
       ),
     );
 
-    if (!mounted || isCompleted != true) {
+    if (!mounted || finishResult == null) {
       return;
     }
 
     setState(() {
+      _todaySales = finishResult.sales;
+      _todayDeliveryCount = finishResult.deliveryCount;
+      _todayOnlineTime = finishResult.onlineTime;
       _isDelivering = false;
-      _targetCount = null;
-      _weather = null;
+      _deliverySession = null;
     });
   }
 
@@ -68,9 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const GreetingHeader(
+              GreetingHeader(
                 logoWidth: 180,
                 logoBottomSpacing: 16,
+                greeting: _isDelivering ? '配達中です' : null,
+                subtitle: _isDelivering ? '安全運転でいきましょう' : null,
               ),
               const SizedBox(height: 24),
               if (!_isDelivering)
@@ -97,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: InfoCard(
                         title: '目標件数',
-                        value: _targetCount?.toString() ?? '0',
+                        value: _deliverySession?.targetCount.toString() ?? '0',
                         unit: '件',
                         icon: Icons.flag,
                       ),
@@ -106,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: InfoCard(
                         title: '天気',
-                        value: _weather ?? '',
+                        value: _deliverySession?.weather ?? '',
                         unit: '',
                         icon: Icons.wb_sunny_outlined,
                       ),
@@ -120,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InfoCard(
                       title: '今日の利益',
-                      value: '0',
+                      value: _todaySales.toString(),
                       unit: '円',
                       icon: Icons.account_balance_wallet,
                     ),
@@ -129,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InfoCard(
                       title: '今日の売上',
-                      value: '0',
+                      value: _todaySales.toString(),
                       unit: '円',
                       icon: Icons.payments,
                     ),
@@ -142,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InfoCard(
                       title: '今日の件数',
-                      value: '0',
+                      value: _todayDeliveryCount.toString(),
                       unit: '件',
                       icon: Icons.delivery_dining,
                     ),
@@ -151,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InfoCard(
                       title: 'オンライン',
-                      value: '0:00',
+                      value: _todayOnlineTime,
                       unit: '',
                       icon: Icons.timer,
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../models/finish_input_result.dart';
 import '../../widgets/greeting_header.dart';
 import '../../widgets/primary_button.dart';
 
@@ -36,11 +37,32 @@ class _FinishInputScreenState extends State<FinishInputScreen> {
       return;
     }
 
+    final sales = _parseNumber(salesController.text);
+    final deliveryCount = _parseNumber(countController.text);
+    final distance = _parseNumber(distanceController.text);
+
+    if (sales == null || deliveryCount == null || distance == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('数値項目は半角数字で入力してください')),
+      );
+      return;
+    }
+
     setState(() {
       _isCompleting = true;
     });
-    Navigator.of(context).pop(true);
+    Navigator.of(context).pop(
+      FinishInputResult(
+        onlineTime: onlineController.text.trim(),
+        sales: sales,
+        deliveryCount: deliveryCount,
+        distance: distance,
+      ),
+    );
   }
+
+  int? _parseNumber(String value) =>
+      int.tryParse(value.trim().replaceAll(',', '').replaceAll('，', ''));
 
   @override
   void dispose() {

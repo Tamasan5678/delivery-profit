@@ -8,11 +8,15 @@ class GreetingHeader extends StatelessWidget {
     this.logoAssetPath = 'assets/images/logo.png',
     this.logoWidth = 90,
     this.logoBottomSpacing = 24,
+    this.greeting,
+    this.subtitle,
   });
 
   final String logoAssetPath;
   final double logoWidth;
   final double logoBottomSpacing;
+  final String? greeting;
+  final String? subtitle;
 
   String _getGreeting() {
     final hour = DateTime.now().hour;
@@ -44,7 +48,7 @@ class GreetingHeader extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            _getGreeting(),
+            greeting ?? _getGreeting(),
             style: AppTextStyles.title,
           ),
         ),
@@ -54,7 +58,8 @@ class GreetingHeader extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            '今日も安全運転でいきましょう😊',
+            subtitle ??
+                '今日も安全運転でいきましょう😊',
             style: AppTextStyles.caption,
           ),
         ),

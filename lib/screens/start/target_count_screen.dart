@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'weather_screen.dart';
+import '../../models/delivery_session.dart';
 import '../../widgets/greeting_header.dart';
 import '../../widgets/info_card.dart';
 import '../../widgets/option_button.dart';
 import '../../widgets/primary_button.dart';
+import 'weather_screen.dart';
 
 class TargetCountScreen extends StatelessWidget {
   const TargetCountScreen({
@@ -51,8 +52,8 @@ class TargetCountScreen extends StatelessWidget {
               PrimaryButton(
                 text: '次へ',
                 onPressed: () async {
-                  final deliveryStart = await Navigator.of(context).push<
-                      ({int targetCount, String weather})>(
+                  final deliveryStart = await Navigator.of(context)
+                      .push<DeliverySession>(
                     MaterialPageRoute(
                       builder: (_) => WeatherScreen(targetCount: targetCount),
                     ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'target_count_screen.dart';
+import '../../models/delivery_session.dart';
 import '../../widgets/greeting_header.dart';
 import '../../widgets/info_card.dart';
 import '../../widgets/option_button.dart';
 import '../../widgets/primary_button.dart';
+import 'target_count_screen.dart';
 
 class StartDistanceScreen extends StatelessWidget {
   const StartDistanceScreen({super.key});
@@ -46,8 +47,8 @@ class StartDistanceScreen extends StatelessWidget {
               PrimaryButton(
                 text: '次へ',
                 onPressed: () async {
-                  final deliveryStart = await Navigator.of(context).push<
-                      ({int targetCount, String weather})>(
+                  final deliveryStart = await Navigator.of(context)
+                      .push<DeliverySession>(
                     MaterialPageRoute(
                       builder: (_) => const TargetCountScreen(),
                     ),

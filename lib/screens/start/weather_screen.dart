@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../models/delivery_session.dart';
 import '../../widgets/greeting_header.dart';
 import '../../widgets/primary_button.dart';
 
@@ -17,6 +18,27 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   String _selectedWeather = '晴れ';
+  bool _isStarting = false;
+
+  void _selectWeather(String weather) {
+    // 遷移処理より先に選択値を確定させる。
+    _selectedWeather = weather;
+    setState(() {});
+  }
+
+  void _startDelivery() {
+    if (_isStarting) {
+      return;
+    }
+
+    _isStarting = true;
+    final selectedWeather = _selectedWeather;
+
+    Navigator.of(context).pop(DeliverySession(
+      targetCount: widget.targetCount,
+      weather: selectedWeather,
+    ));
+  }
 
   Widget _weatherTile(String label, IconData icon, Color color) {
     final selected = _selectedWeather == label;
@@ -29,9 +51,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             ? const Icon(Icons.check_circle, color: Colors.green)
             : null,
         onTap: () {
-          setState(() {
-            _selectedWeather = label;
-          });
+          _selectWeather(label);
         },
       ),
     );
@@ -63,12 +83,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
               const Spacer(),
               PrimaryButton(
                 text: '配達を開始する',
-                onPressed: () {
-                  Navigator.of(context).pop((
-                    targetCount: widget.targetCount,
-                    weather: _selectedWeather,
-                  ));
-                },
+                onPressed: _startDelivery,
               ),
             ],
           ),
