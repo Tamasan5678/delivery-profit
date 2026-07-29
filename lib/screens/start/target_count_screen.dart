@@ -7,7 +7,12 @@ import '../../widgets/option_button.dart';
 import '../../widgets/primary_button.dart';
 
 class TargetCountScreen extends StatelessWidget {
-  const TargetCountScreen({super.key});
+  const TargetCountScreen({
+    super.key,
+    this.targetCount = 20,
+  });
+
+  final int targetCount;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +29,9 @@ class TargetCountScreen extends StatelessWidget {
             children: [
               const GreetingHeader(),
               const SizedBox(height: 24),
-              const InfoCard(
+              InfoCard(
                 title: '今日の目標件数',
-                value: '20',
+                value: targetCount.toString(),
                 unit: '件',
                 icon: Icons.flag,
               ),
@@ -45,12 +50,17 @@ class TargetCountScreen extends StatelessWidget {
               const SizedBox(height: 16),
               PrimaryButton(
                 text: '次へ',
-                onPressed: () {
-                  Navigator.of(context).push(
+                onPressed: () async {
+                  final deliveryStart = await Navigator.of(context).push<
+                      ({int targetCount, String weather})>(
                     MaterialPageRoute(
-                      builder: (_) => const WeatherScreen(),
+                      builder: (_) => WeatherScreen(targetCount: targetCount),
                     ),
                   );
+
+                  if (context.mounted && deliveryStart != null) {
+                    Navigator.of(context).pop(deliveryStart);
+                  }
                 },
               ),
             ],

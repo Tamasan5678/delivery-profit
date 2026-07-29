@@ -4,7 +4,12 @@ import '../../widgets/greeting_header.dart';
 import '../../widgets/primary_button.dart';
 
 class WeatherScreen extends StatefulWidget {
-  const WeatherScreen({super.key});
+  const WeatherScreen({
+    super.key,
+    required this.targetCount,
+  });
+
+  final int targetCount;
 
   @override
   State<WeatherScreen> createState() => _WeatherScreenState();
@@ -59,7 +64,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
               PrimaryButton(
                 text: '配達を開始する',
                 onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).pop((
+                    targetCount: widget.targetCount,
+                    weather: _selectedWeather,
+                  ));
                 },
               ),
             ],

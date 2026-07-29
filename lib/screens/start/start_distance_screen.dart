@@ -45,12 +45,17 @@ class StartDistanceScreen extends StatelessWidget {
               const SizedBox(height: 16),
               PrimaryButton(
                 text: '次へ',
-                onPressed: () {
-                  Navigator.of(context).push(
+                onPressed: () async {
+                  final deliveryStart = await Navigator.of(context).push<
+                      ({int targetCount, String weather})>(
                     MaterialPageRoute(
                       builder: (_) => const TargetCountScreen(),
                     ),
                   );
+
+                  if (context.mounted && deliveryStart != null) {
+                    Navigator.of(context).pop(deliveryStart);
+                  }
                 },
               ),
             ],

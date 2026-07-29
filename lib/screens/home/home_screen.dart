@@ -17,6 +17,46 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  bool _isDelivering = false;
+  int? _targetCount;
+  String? _weather;
+
+  Future<void> _startDelivery() async {
+    final deliveryStart = await Navigator.of(context).push<
+        ({int targetCount, String weather})>(
+      MaterialPageRoute(
+        builder: (_) => const StartDistanceScreen(),
+      ),
+    );
+
+    if (!mounted || deliveryStart == null) {
+      return;
+    }
+
+    setState(() {
+      _isDelivering = true;
+      _targetCount = deliveryStart.targetCount;
+      _weather = deliveryStart.weather;
+    });
+  }
+
+  Future<void> _finishDelivery() async {
+    final isCompleted = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) => const FinishInputScreen(),
+      ),
+    );
+
+    if (!mounted || isCompleted != true) {
+      return;
+    }
+
+    setState(() {
+      _isDelivering = false;
+      _targetCount = null;
+      _weather = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,28 +73,47 @@ class _HomeScreenState extends State<HomeScreen> {
                 logoBottomSpacing: 16,
               ),
               const SizedBox(height: 24),
-              PrimaryButton(
-                text: '🚗 配達開始',
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const StartDistanceScreen(),
+              if (!_isDelivering)
+                PrimaryButton(
+                  text: '🚗 配達開始',
+                  onPressed: _startDelivery,
+                ),
+              if (_isDelivering) const SizedBox(height: 16),
+              if (_isDelivering)
+                OptionButton(
+                  text: '配達終了',
+                  icon: Icons.stop_circle_outlined,
+                  onPressed: _finishDelivery,
+                ),
+              if (_isDelivering) ...[
+                const SizedBox(height: 24),
+                const Text(
+                  '配達中',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: InfoCard(
+                        title: '目標件数',
+                        value: _targetCount?.toString() ?? '0',
+                        unit: '件',
+                        icon: Icons.flag,
+                      ),
                     ),
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
-              OptionButton(
-                text: '配達終了',
-                icon: Icons.stop_circle_outlined,
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const FinishInputScreen(),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: InfoCard(
+                        title: '天気',
+                        value: _weather ?? '',
+                        unit: '',
+                        icon: Icons.wb_sunny_outlined,
+                      ),
                     ),
-                  );
-                },
-              ),
+                  ],
+                ),
+              ],
               const SizedBox(height: 24),
               Row(
                 children: [

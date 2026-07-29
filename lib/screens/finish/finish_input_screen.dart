@@ -15,6 +15,32 @@ class _FinishInputScreenState extends State<FinishInputScreen> {
   final salesController = TextEditingController();
   final countController = TextEditingController();
   final distanceController = TextEditingController();
+  bool _isCompleting = false;
+
+  void _completeDelivery() {
+    if (_isCompleting) {
+      return;
+    }
+
+    final hasEmptyField = [
+      onlineController,
+      salesController,
+      countController,
+      distanceController,
+    ].any((controller) => controller.text.trim().isEmpty);
+
+    if (hasEmptyField) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('すべての項目を入力してください')),
+      );
+      return;
+    }
+
+    setState(() {
+      _isCompleting = true;
+    });
+    Navigator.of(context).pop(true);
+  }
 
   @override
   void dispose() {
@@ -66,9 +92,7 @@ class _FinishInputScreenState extends State<FinishInputScreen> {
               const SizedBox(height: 12),
               PrimaryButton(
                 text: '保存する',
-                onPressed: () {
-                  // TODO: SQLiteへ保存
-                },
+                onPressed: _completeDelivery,
               ),
             ],
           ),
