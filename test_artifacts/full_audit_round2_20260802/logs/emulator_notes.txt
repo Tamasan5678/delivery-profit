@@ -1,0 +1,11 @@
+Emulator audit notes
+
+- APK installed with adb install -r. Existing package data was retained.
+- Existing DB and SharedPreferences files were listed read-only; contents were not deleted.
+- Existing history record was not deleted.
+- Main inspected screens: Home, Settings, History, History Detail, Start Distance, Target Count, Weather.
+- Cold launch after package-update noise settled: 5578 ms Displayed/Fully drawn.
+- Font scale was temporarily changed from 1.0 to 2.0. Emulator disconnected before completed visual assessment.
+- Emulator was restarted; persisted font scale was observed as 2.0 and restored to 1.0.
+- No app-origin fatal pattern was found in the captured logcat.
+

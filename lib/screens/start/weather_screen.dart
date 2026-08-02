@@ -8,9 +8,11 @@ class WeatherScreen extends StatefulWidget {
   const WeatherScreen({
     super.key,
     required this.targetCount,
+    required this.startDistanceKm,
   });
 
   final int targetCount;
+  final double startDistanceKm;
 
   @override
   State<WeatherScreen> createState() => _WeatherScreenState();
@@ -34,10 +36,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
     _isStarting = true;
     final selectedWeather = _selectedWeather;
 
-    Navigator.of(context).pop(DeliverySession(
-      targetCount: widget.targetCount,
-      weather: selectedWeather,
-    ));
+    Navigator.of(context).pop(
+      DeliverySession(
+        sessionId: DeliverySession.generateSessionId(),
+        targetCount: widget.targetCount,
+        weather: selectedWeather,
+        startDistanceKm: widget.startDistanceKm,
+        startedAtUtcMs: DateTime.now().toUtc().millisecondsSinceEpoch,
+      ),
+    );
   }
 
   Widget _weatherTile(String label, IconData icon, Color color) {
@@ -60,32 +67,38 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('今日の天気'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('今日の天気'), centerTitle: true),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const GreetingHeader(),
-              const SizedBox(height: 24),
-              const Text(
-                '今日の天気を選択してください。',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        child: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const GreetingHeader(),
+                      const SizedBox(height: 24),
+                      const Text(
+                        '今日の天気を選択してください。',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      _weatherTile('晴れ', Icons.wb_sunny, Colors.orange),
+                      _weatherTile('曇り', Icons.cloud, Colors.blueGrey),
+                      _weatherTile('雨', Icons.umbrella, Colors.blue),
+                      const Spacer(),
+                      PrimaryButton(text: '配達を開始する', onPressed: _startDelivery),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 16),
-              _weatherTile('晴れ', Icons.wb_sunny, Colors.orange),
-              _weatherTile('曇り', Icons.cloud, Colors.blueGrey),
-              _weatherTile('雨', Icons.umbrella, Colors.blue),
-              const Spacer(),
-              PrimaryButton(
-                text: '配達を開始する',
-                onPressed: _startDelivery,
-              ),
-            ],
+            ),
           ),
         ),
       ),

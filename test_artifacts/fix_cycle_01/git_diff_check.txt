@@ -1,0 +1,6 @@
+Command: git diff --check
+Exit code: 0
+
+No whitespace errors.
+Pre-existing LF-to-CRLF working-copy warnings were emitted for multiple modified files.
+

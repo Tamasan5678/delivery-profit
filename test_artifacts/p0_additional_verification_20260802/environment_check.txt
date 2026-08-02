@@ -1,0 +1,44 @@
+﻿確認日時: 2026-08-02 13:35:20 +09:00
+flutter pub get: 120秒間無出力でタイムアウト
+
+[関連プロセス]
+
+ProcessName    Id         CPU StartTime          
+-----------    --         --- ---------          
+cmd         23596     0.15625 2026/08/02 9:30:26 
+dart         4200    0.296875 2026/08/02 9:30:42 
+dart         7456     0.21875 2026/08/02 9:30:40 
+dart        10264   26.609375 2026/08/02 9:30:40 
+dart        17416       0.125 2026/08/02 9:30:39 
+dart        20392    0.015625 2026/08/02 9:30:40 
+java         9200       213.5 2026/08/02 9:34:03 
+java        14972   16.234375 2026/08/02 11:36:07
+powershell  10568    0.609375 2026/08/02 13:35:20
+powershell  15796    2.484375 2026/08/02 9:47:57 
+powershell  22584    0.984375 2026/08/02 13:07:15
+studio64    18436 2519.203125 2026/08/02 9:30:12
+
+[Flutter SDK lockfile]
+存在確認: True
+更新日時: 2026-08-02 11:35:53 +09:00
+サイズ: 0
+
+[依存状態]
+pubspec.lockにsqflite_common_ffi: False
+.dart_tool/package_config.jsonにsqflite_common_ffi: False
+pub getログサイズ: 0
+
+[一時領域書込確認]
+成果物領域: 成功
+システム一時領域: 成功
+
+[追加切り分け]
+確認日時: 2026-08-02 13:46:25 +09:00
+SDK lockfile排他取得: 成功（確認時点で他プロセスの排他保持なし）
+直近1時間に開始したdart/flutterプロセス数: 0
+静的に数えたtest/testWidgets宣言数: 22
+pubspec.lock更新状態(git): 変更なし
+README.md変更状態(git): 変更なし
+docs/project_rules.md変更状態(git): 変更なし
+docs/roadmap.md状態(git): ?? docs/roadmap.md
+SDK lockfile書込アクセス取得: 失敗 (MethodInvocationException)

@@ -1,0 +1,3 @@
+実行コマンド: flutter test --no-pub test/repositories/delivery_repository_test.dart
+結果: 90秒間、標準出力・標準エラーとも無出力のままタイムアウト
+判定: 実SQLite FFI migrationテストは未実行

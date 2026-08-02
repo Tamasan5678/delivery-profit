@@ -1,0 +1,17 @@
+﻿warning: in the working copy of 'docs/architecture.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/changelog.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/database.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/decisions.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/navigation.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/requirements.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/screen_design.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/models/delivery_session.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/screens/finish/finish_input_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/screens/history/history_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/screens/home/home_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/screens/settings/settings_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/screens/start/start_distance_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/screens/start/target_count_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/screens/start/weather_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/widgets/info_card.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'test/widget_test.dart', LF will be replaced by CRLF the next time Git touches it

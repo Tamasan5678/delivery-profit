@@ -1,0 +1,19 @@
+﻿ docs/architecture.md                         |  12 +-
+ docs/changelog.md                            |  19 ++
+ docs/database.md                             |  55 +++--
+ docs/decisions.md                            |  28 +++
+ docs/navigation.md                           |  13 +-
+ docs/requirements.md                         |  17 +-
+ docs/screen_design.md                        |  64 +++++-
+ lib/models/delivery_session.dart             |   4 +
+ lib/screens/finish/finish_input_screen.dart  | 252 ++++++++++++++++------
+ lib/screens/history/history_screen.dart      | 136 ++++++++++++
+ lib/screens/home/home_screen.dart            | 301 +++++++++++++++++++++++----
+ lib/screens/settings/settings_screen.dart    | 104 +++++++++
+ lib/screens/start/start_distance_screen.dart |  45 ++--
+ lib/screens/start/target_count_screen.dart   |  53 +++--
+ lib/screens/start/weather_screen.dart        |  24 +--
+ lib/services/preferences_service.dart        |  39 +++-
+ lib/widgets/info_card.dart                   |  24 ++-
+ test/widget_test.dart                        | 183 ++++++++++++++--
+ 18 files changed, 1161 insertions(+), 212 deletions(-)

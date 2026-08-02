@@ -1,0 +1,31 @@
+﻿ M docs/architecture.md
+ M docs/changelog.md
+ M docs/database.md
+ M docs/decisions.md
+ M docs/navigation.md
+ M docs/requirements.md
+ M docs/screen_design.md
+ M lib/models/delivery_session.dart
+ M lib/screens/finish/finish_input_screen.dart
+ M lib/screens/history/history_screen.dart
+ M lib/screens/home/home_screen.dart
+ M lib/screens/settings/settings_screen.dart
+ M lib/screens/start/start_distance_screen.dart
+ M lib/screens/start/target_count_screen.dart
+ M lib/screens/start/weather_screen.dart
+ M lib/services/preferences_service.dart
+ M lib/widgets/info_card.dart
+ M test/widget_test.dart
+?? docs/roadmap.md
+?? lib/database/
+?? lib/models/delivery_record.dart
+?? lib/repositories/
+?? lib/screens/finish/daily_result_screen.dart
+?? lib/screens/history/history_detail_screen.dart
+?? lib/services/active_delivery_storage.dart
+?? lib/services/delivery_calculator.dart
+?? lib/widgets/scroll_picker_bottom_sheet.dart
+?? support/
+?? test/models/
+?? test/services/
+?? test_artifacts/full_audit_20260802/

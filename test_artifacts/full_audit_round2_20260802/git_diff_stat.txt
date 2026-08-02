@@ -1,0 +1,24 @@
+ docs/architecture.md                         |  14 +-
+ docs/changelog.md                            |  23 ++
+ docs/database.md                             |  64 ++++--
+ docs/decisions.md                            |  40 ++++
+ docs/navigation.md                           |  13 +-
+ docs/requirements.md                         |  21 +-
+ docs/screen_design.md                        |  64 +++++-
+ lib/models/delivery_session.dart             |  21 ++
+ lib/screens/finish/finish_input_screen.dart  | 255 +++++++++++++++------
+ lib/screens/history/history_screen.dart      | 136 ++++++++++++
+ lib/screens/home/home_screen.dart            | 318 ++++++++++++++++++++++++---
+ lib/screens/settings/settings_screen.dart    | 143 ++++++++++++
+ lib/screens/start/start_distance_screen.dart |  45 ++--
+ lib/screens/start/target_count_screen.dart   |  53 +++--
+ lib/screens/start/weather_screen.dart        |  25 ++-
+ lib/services/preferences_service.dart        | 121 +++++++++-
+ lib/widgets/info_card.dart                   |  24 +-
+ pubspec.lock                                 |  90 +++++++-
+ pubspec.yaml                                 |   2 +
+ test/widget_test.dart                        | 272 +++++++++++++++++++++--
+ 20 files changed, 1530 insertions(+), 214 deletions(-)
+
+Note: untracked files are not included by git diff --stat.
+

@@ -1,0 +1,4 @@
+実行コマンド: flutter pub get
+結果: 120秒間、標準出力・標準エラーとも無出力のままタイムアウト
+判定: 依存関係解決処理へ到達したことを確認できず、未完了
+補足: pubspec.lockおよび.dart_tool/package_config.jsonにsqflite_common_ffiは反映されていない。

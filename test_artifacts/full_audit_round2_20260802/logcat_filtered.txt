@@ -1,0 +1,32 @@
+Device: emulator-5554 / Pixel_9 AVD / Android 17
+Package: com.example.delivery_profit_v2
+
+Cold launch:
+Status: ok
+LaunchState: COLD
+TotalTime: 5578 ms
+WaitTime: 5613 ms
+ActivityTaskManager: Displayed com.example.delivery_profit_v2/.MainActivity: +5s578ms
+ActivityTaskManager: Fully drawn com.example.delivery_profit_v2/.MainActivity: +5s578ms
+
+Application fatal-pattern scan:
+- FATAL EXCEPTION: none
+- E/flutter: none
+- Unhandled Exception: none
+- SQLiteException/DatabaseException from app process: none
+- UNIQUE constraint failed from app process: none
+- RenderFlex overflow: none
+- setState after dispose: none
+- deactivated widget lookup: none
+- Navigator error: none
+- RangeError/FormatException: none
+- NaN/Infinity: none
+- LateInitializationError: none
+- Null check operator error: none
+
+Excluded unrelated device logs:
+- Launcher animation E-level stack lines from com.android.launcher3.
+- Media picker UNIQUE constraint messages from the system media picker process.
+
+Test-run-only expected logs are recorded in flutter_test.txt.
+

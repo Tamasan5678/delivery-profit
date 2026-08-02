@@ -1,0 +1,17 @@
+監査対象パッケージ: com.example.delivery_profit_v2
+既存の同日 startup_logcat.txt を検査。
+
+検出なし:
+- FATAL EXCEPTION / AndroidRuntime crash
+- E/flutter
+- ANR
+- アプリ由来の SQLite 初期化例外
+- SharedPreferences 初期化例外
+
+起動計測:
+- ActivityTaskManager Displayed: +7s465ms
+- ActivityTaskManager Fully drawn: +7s465ms
+
+補足:
+- SQLiteLog の double-quoted string literal 警告は Google Play (Finsky) 側ログであり、本アプリDB由来ではない。
+- hiddenapi、proc_max_map_count、exact alarm の警告は本アプリのDart例外／クラッシュではない。

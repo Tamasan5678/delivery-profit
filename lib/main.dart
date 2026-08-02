@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'core/theme/app_theme.dart';
 import 'screens/home/home_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await configureDeviceOrientations();
+
   runApp(const DeliveryProfitApp());
+}
+
+Future<void> configureDeviceOrientations() {
+  return SystemChrome.setPreferredOrientations(const [
+    DeviceOrientation.portraitUp,
+  ]);
 }
 
 class DeliveryProfitApp extends StatelessWidget {
